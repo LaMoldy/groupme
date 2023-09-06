@@ -1,11 +1,16 @@
 package main
 
 import (
-    "github.com/LaMoldy/groupme/server/pkg/routes"
     "github.com/gin-gonic/gin"
+    "github.com/LaMoldy/groupme/server/pkg/routes"
+    "github.com/LaMoldy/groupme/server/pkg/database"
+    _ "github.com/lib/pq"
 )
 
 func main() {
+    // Connect database
+    database.ConnectDatabase();
+
     // Creates the router
     router := gin.Default()
 
