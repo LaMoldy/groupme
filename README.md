@@ -3,7 +3,7 @@ An application to help people find a group of people to work on projects togethe
 
 ### Prerequisites
 1. Install all dependencies for the API
-2. Create a `.env` file in the server folder (reference example file)[a link](https://github.com/LaMoldy/groupme/tree/main/server/.env.example)
+2. Create a `.env` file in the server folder (reference [example](https://github.com/LaMoldy/groupme/tree/main/server/.env.example) file)
 4. Start the API
 
 #### Installing Dependencies
