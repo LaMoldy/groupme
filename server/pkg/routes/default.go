@@ -8,7 +8,7 @@ import (
 )
 
 // Sets up default route handler
-func Home(c *gin.Context) {
+func Welcome(c *gin.Context) {
     var message = models.Message {
 	Message: "Welcome to GroupMe's API!",
 	Status: http.StatusOK,
@@ -18,5 +18,9 @@ func Home(c *gin.Context) {
 	http.StatusOK,
 	message,
     )
+}
+
+func RedirectToWelcome(c *gin.Context) {
+    c.Redirect(http.StatusFound, "/api")
 }
 
