@@ -2,9 +2,11 @@ package routes
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/LaMoldy/groupme/server/models"
 	"github.com/LaMoldy/groupme/server/pkg/database"
+	"github.com/LaMoldy/groupme/server/pkg/log"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,12 +17,10 @@ func GetUserByEmail(c *gin.Context) {
 
     result := db.Find(&users)
     if result.Error != nil {
-	c.IndentedJSON(
+	log.CreateLog(
+	    c,
+	    "A problem has occurred with finding a user",
 	    http.StatusInternalServerError,
-	    models.Message {
-		Message: "A problem has occurred: " + result.Error.Error(),
-		Status: http.StatusInternalServerError,
-	    },
 	)
 	return
     }
@@ -48,35 +48,39 @@ func CreateUser(c *gin.Context) {
     firstName := c.Query("firstName")
     lastName := c.Query("lastName")
     password := c.Query("password")
+    dob := c.Query("dob")
+
+    dateOfBirth, err := time.Parse("2000-31-6", dob)
+    if err != nil {
+	log.CreateLog(
+	    c,
+	    "Error: Problem converting date",
+	    http.StatusInternalServerError,
+	)
+    }
 
     user := models.User {
 	Email: email,
 	FirstName: firstName,
 	LastName: lastName,
 	Password: password,
+	DateOfBirth: dateOfBirth,
     }
 
     result := db.Create(&user)
 
     if result.Error != nil {
-	var message = models.Message {
-	    Message: "Error: Problem creating a user",
-	    Status: http.StatusInternalServerError,
-	}
-
-	c.IndentedJSON(
+	log.CreateLog(
+	    c,
+	    "Error: Problem creating user",
 	    http.StatusInternalServerError,
-	    message,
 	)
     }
 
-    var message = models.Message {
-	Message: "User created successfully",
-	Status: http.StatusOK,
-    }
-
-    c.IndentedJSON(
+    log.CreateLog(
+	c,
+	"User created successfully",
 	http.StatusOK,
-	message,
     )
 }
+

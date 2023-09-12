@@ -6,24 +6,13 @@ import (
     "time"
     "os"
 
-    "github.com/LaMoldy/groupme/server/pkg/routes"
-    "github.com/gin-gonic/gin"
+    "github.com/LaMoldy/groupme/server/pkg/router"
     _ "github.com/lib/pq"
 )
 
 func main() {
-    // Creates the router
-    router := gin.Default()
-
-    // Router configuration
-    router.RedirectFixedPath = true
-    router.RedirectTrailingSlash = true
-
-    // Paths
-    router.GET("/", routes.RedirectToWelcome)
-    router.GET("/api", routes.Welcome)
-    router.GET("/api/user/email", routes.GetUserByEmail)
-    router.POST("/api/user/create", routes.CreateUser)
+    // Gets the configured setup setup router
+    router := router.SetupRouter()
 
     // Configures the server
     server := &http.Server {

@@ -2,8 +2,8 @@ package models
 
 import "gorm.io/gorm"
 
-type Log struct {
+type Chat struct {
     gorm.Model
     Message string `json:"message"`
-    Status  int    `json:"status"`
+    Author  User `json:"user"`
 }

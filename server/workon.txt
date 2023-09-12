@@ -1,0 +1,5 @@
+[ ] Try to get the tests working for the default and user routes
+[ ] Add the testing library for the route testing
+[ ] Make sure that the create user works
+[ ] Make sure that the project create works
+[ ] Make sure that the logger does not break during each use

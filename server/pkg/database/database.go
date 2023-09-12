@@ -50,6 +50,7 @@ func ConnectDatabase() *gorm.DB {
     }
 
     db.AutoMigrate(models.User{})
+    db.AutoMigrate(models.Project{})
 
     return db
 }

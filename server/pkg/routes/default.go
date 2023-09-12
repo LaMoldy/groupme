@@ -1,22 +1,18 @@
 package routes
 
 import (
-    "net/http"
+	"net/http"
 
-    "github.com/LaMoldy/groupme/server/models"
-    "github.com/gin-gonic/gin"
+	"github.com/LaMoldy/groupme/server/pkg/log"
+	"github.com/gin-gonic/gin"
 )
 
 // Sets up default route handler
 func Welcome(c *gin.Context) {
-    var message = models.Message {
-	Message: "Welcome to GroupMe's API!",
-	Status: http.StatusOK,
-    }
-
-    c.IndentedJSON(
+    log.CreateLog(
+	c,
+	"Welcome to the API!",
 	http.StatusOK,
-	message,
     )
 }
 
